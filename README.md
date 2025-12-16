@@ -64,7 +64,7 @@ A modern, fully-responsive fast food website built with React and Tailwind CSS. 
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/quickbite.git
+git clone https://github.com/Geeksjayjay388/Burgerhub.git
 cd quickbite
 ```
 
@@ -366,7 +366,7 @@ vercel --prod
 
 1. Add homepage to `package.json`:
 ```json
-"homepage": "https://yourusername.github.io/quickbite"
+"homepage": "https://Geeksjayjay388.github.io/burgerhub"
 ```
 
 2. Install gh-pages:
@@ -464,11 +464,7 @@ copies of the Software...
 
 ## 📞 Support & Contact
 
-- **Email:** support@quickbite.com
-- **Issues:** [GitHub Issues](https://github.com/yourusername/quickbite/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/yourusername/quickbite/discussions)
-- **Twitter:** [@QuickBiteFood](https://twitter.com/quickbitefood)
-- **Discord:** [Join our community](https://discord.gg/quickbite)
+- **Email:** geekstechnologies911@gmail.com
 
 ---
 
@@ -518,6 +514,6 @@ If you find this project useful, please consider giving it a star! ⭐
 
 **Made with ❤️ for burger lovers everywhere**
 
-[Website](https://quickbite.com) · [Report Bug](https://github.com/yourusername/quickbite/issues) · [Request Feature](https://github.com/yourusername/quickbite/issues)
+[Website](https://quickbite.com) · [Report Bug](https://github.com/Geeksjayjay388/quickbite/issues) · [Request Feature](https://github.com/yourusername/quickbite/issues)
 
 </div>
