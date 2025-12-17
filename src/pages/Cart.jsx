@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Trash2, Plus, Minus, ArrowLeft, Tag, ShoppingCart, ShieldCheck, RotateCcw, Phone, Package } from 'lucide-react';
 
 const Cart = () => {
@@ -34,7 +33,7 @@ const Cart = () => {
   const [discount, setDiscount] = useState(0);
 
   const getItemIcon = (type) => {
-    const iconClass = "w-10 h-10";
+    const iconClass = "w-8 h-8 sm:w-10 sm:h-10";
     switch(type) {
       case 'burger':
         return (
@@ -89,70 +88,68 @@ const Cart = () => {
   const total = subtotal + tax + deliveryFee - discountAmount;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 bg-gray-50 min-h-screen">
-      <div className="mb-8">
-        <Link
-          to="/menu"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors"
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 bg-gray-50 min-h-screen">
+      <div className="mb-6 sm:mb-8">
+        <button
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors text-sm sm:text-base"
         >
           <ArrowLeft className="w-4 h-4" />
           Continue Shopping
-        </Link>
-        <h1 className="text-4xl font-bold text-gray-900 mt-4">Shopping Cart</h1>
-        <p className="text-gray-600 mt-2">{cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart</p>
+        </button>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mt-4">Shopping Cart</h1>
+        <p className="text-sm sm:text-base text-gray-600 mt-2">{cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart</p>
       </div>
 
       {cartItems.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-2xl shadow-sm">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-gray-100 rounded-full mb-6">
-            <ShoppingCart className="w-12 h-12 text-gray-400" />
+        <div className="text-center py-12 sm:py-20 bg-white rounded-2xl shadow-sm">
+          <div className="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-full mb-6">
+            <ShoppingCart className="w-10 h-10 sm:w-12 sm:h-12 text-gray-400" />
           </div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">Your cart is empty</h2>
-          <p className="text-gray-500 mb-8 max-w-md mx-auto">Start adding items to your cart to see them here.</p>
-          <Link
-            to="/menu"
-            className="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+          <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 px-4">Your cart is empty</h2>
+          <p className="text-sm sm:text-base text-gray-500 mb-8 max-w-md mx-auto px-4">Start adding items to your cart to see them here.</p>
+          <button
+            className="inline-block bg-gray-900 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base"
           >
             Browse Menu
-          </Link>
+          </button>
         </div>
       ) : (
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {cartItems.map(item => (
-              <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-                <div className="flex gap-6">
+              <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow">
+                <div className="flex gap-3 sm:gap-6">
                   {/* Item Icon */}
-                  <div className="w-20 h-20 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 text-gray-700">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 text-gray-700">
                     {getItemIcon(item.image)}
                   </div>
 
                   {/* Item Details */}
-                  <div className="flex-grow">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
-                        <p className="text-gray-900 font-medium mt-1">${item.price.toFixed(2)}</p>
+                  <div className="flex-grow min-w-0">
+                    <div className="flex justify-between items-start mb-2 gap-2">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 break-words">{item.name}</h3>
+                        <p className="text-gray-900 font-medium mt-1 text-sm sm:text-base">${item.price.toFixed(2)}</p>
                       </div>
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="text-gray-400 hover:text-red-600 transition-colors"
+                        className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0 p-1"
                         aria-label="Remove item"
                       >
-                        <Trash2 className="w-5 h-5" />
+                        <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
                     </div>
 
                     {/* Customizations */}
                     {item.customizations && item.customizations.length > 0 && (
                       <div className="mb-4">
-                        <p className="text-sm text-gray-500 mb-2">Customizations:</p>
-                        <div className="flex flex-wrap gap-2">
+                        <p className="text-xs sm:text-sm text-gray-500 mb-2">Customizations:</p>
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
                           {item.customizations.map((custom, idx) => (
                             <span
                               key={idx}
-                              className="px-3 py-1 bg-gray-50 text-gray-700 text-xs font-medium rounded-md border border-gray-200"
+                              className="px-2 sm:px-3 py-1 bg-gray-50 text-gray-700 text-xs font-medium rounded-md border border-gray-200"
                             >
                               {custom}
                             </span>
@@ -162,25 +159,25 @@ const Cart = () => {
                     )}
 
                     {/* Quantity Controls */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <button
                           onClick={() => updateQuantity(item.id, -1)}
-                          className="w-9 h-9 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-gray-50 hover:border-gray-400 transition-all"
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-gray-50 hover:border-gray-400 transition-all"
                           aria-label="Decrease quantity"
                         >
-                          <Minus className="w-4 h-4 text-gray-600" />
+                          <Minus className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                         </button>
-                        <span className="font-medium text-gray-900 w-8 text-center">{item.quantity}</span>
+                        <span className="font-medium text-gray-900 w-6 sm:w-8 text-center text-sm sm:text-base">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.id, 1)}
-                          className="w-9 h-9 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-gray-50 hover:border-gray-400 transition-all"
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-gray-50 hover:border-gray-400 transition-all"
                           aria-label="Increase quantity"
                         >
-                          <Plus className="w-4 h-4 text-gray-600" />
+                          <Plus className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                         </button>
                       </div>
-                      <div className="text-lg font-semibold text-gray-900">
+                      <div className="text-base sm:text-lg font-semibold text-gray-900">
                         ${(item.price * item.quantity).toFixed(2)}
                       </div>
                     </div>
@@ -190,27 +187,27 @@ const Cart = () => {
             ))}
 
             {/* Promo Code */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+            <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-200">
               <div className="flex items-center gap-2 mb-4">
-                <Tag className="w-5 h-5 text-gray-700" />
-                <h3 className="font-semibold text-gray-900">Promo Code</h3>
+                <Tag className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+                <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Promo Code</h3>
               </div>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="text"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
                   placeholder="Enter promo code"
-                  className="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  className="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm sm:text-base"
                 />
                 <button
                   onClick={applyPromoCode}
-                  className="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                  className="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base whitespace-nowrap"
                 >
                   Apply
                 </button>
               </div>
-              <p className="text-sm text-gray-500 mt-3">
+              <p className="text-xs sm:text-sm text-gray-500 mt-3">
                 Try <span className="font-semibold text-gray-700">BURGER20</span> for 20% off your order
               </p>
             </div>
@@ -218,19 +215,19 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Order Summary</h2>
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 lg:sticky lg:top-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Order Summary</h2>
               
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-gray-600">
+              <div className="space-y-3 mb-4 sm:mb-6">
+                <div className="flex justify-between text-sm sm:text-base text-gray-600">
                   <span>Subtotal</span>
                   <span className="font-medium text-gray-900">${subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-sm sm:text-base text-gray-600">
                   <span>Tax (8%)</span>
                   <span className="font-medium text-gray-900">${tax.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-sm sm:text-base text-gray-600">
                   <span>Delivery Fee</span>
                   <span className="font-medium text-gray-900">
                     {deliveryFee === 0 ? (
@@ -241,43 +238,42 @@ const Cart = () => {
                   </span>
                 </div>
                 {discount > 0 && (
-                  <div className="flex justify-between text-green-600">
+                  <div className="flex justify-between text-sm sm:text-base text-green-600">
                     <span>Discount ({discount}%)</span>
                     <span className="font-medium">-${discountAmount.toFixed(2)}</span>
                   </div>
                 )}
               </div>
 
-              <div className="border-t border-gray-200 pt-4 mb-6">
-                <div className="flex justify-between text-lg">
+              <div className="border-t border-gray-200 pt-4 mb-4 sm:mb-6">
+                <div className="flex justify-between text-base sm:text-lg">
                   <span className="font-semibold text-gray-900">Total</span>
                   <span className="font-bold text-gray-900">${total.toFixed(2)}</span>
                 </div>
                 {deliveryFee > 0 && (
-                  <p className="text-sm text-gray-500 mt-2">
+                  <p className="text-xs sm:text-sm text-gray-500 mt-2">
                     Add ${(25 - subtotal).toFixed(2)} more for free delivery
                   </p>
                 )}
               </div>
 
-              <Link
-                to="/checkout"
-                className="block w-full bg-gray-900 text-white text-center py-3.5 rounded-lg font-medium hover:bg-gray-800 transition-colors mb-6"
+              <button
+                className="block w-full bg-gray-900 text-white text-center py-3 sm:py-3.5 rounded-lg font-medium hover:bg-gray-800 transition-colors mb-4 sm:mb-6 text-sm sm:text-base"
               >
                 Proceed to Checkout
-              </Link>
+              </button>
 
               <div className="space-y-3 pt-4 border-t border-gray-100">
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <ShieldCheck className="w-5 h-5 text-gray-400" />
+                <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-600">
+                  <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
                   <span>Secure checkout</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <RotateCcw className="w-5 h-5 text-gray-400" />
+                <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-600">
+                  <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
                   <span>30-minute guarantee</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <Phone className="w-5 h-5 text-gray-400" />
+                <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-600">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
                   <span>24/7 support</span>
                 </div>
               </div>
