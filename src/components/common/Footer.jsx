@@ -1,10 +1,9 @@
-// components/common/Footer.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { 
   Facebook, 
   Twitter, 
   Instagram, 
+  Youtube,
   Mail, 
   Phone, 
   MapPin, 
@@ -13,55 +12,58 @@ import {
   Truck,
   Shield,
   CreditCard,
-  ChevronRight
+  ChevronRight,
+  Heart,
+  Smartphone,
+  Download
 } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gradient-to-b from-gray-900 to-black text-white">
       {/* Top Features Banner */}
-      <div className="bg-gradient-to-r from-red-900 via-gray-900 to-black border-b border-gray-800">
+      <div className="border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-red-600/20 rounded-full flex items-center justify-center">
-                <Truck className="w-6 h-6 text-red-400" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+                <Truck className="w-7 h-7 text-white" />
               </div>
               <div>
-                <div className="font-bold text-sm">FREE DELIVERY</div>
-                <div className="text-xs text-gray-400">Over $25</div>
+                <div className="font-semibold text-white mb-1">Free Delivery</div>
+                <div className="text-sm text-gray-400">Orders over $25</div>
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-yellow-600/20 rounded-full flex items-center justify-center">
-                <Award className="w-6 h-6 text-yellow-400" />
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center shadow-lg">
+                <Award className="w-7 h-7 text-white" />
               </div>
               <div>
-                <div className="font-bold text-sm">QUALITY GUARANTEE</div>
-                <div className="text-xs text-gray-400">Premium Ingredients</div>
+                <div className="font-semibold text-white mb-1">Quality Guaranteed</div>
+                <div className="text-sm text-gray-400">Premium ingredients</div>
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-green-600/20 rounded-full flex items-center justify-center">
-                <Shield className="w-6 h-6 text-green-400" />
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-green-600 to-green-700 rounded-xl flex items-center justify-center shadow-lg">
+                <Shield className="w-7 h-7 text-white" />
               </div>
               <div>
-                <div className="font-bold text-sm">SAFE PAYMENT</div>
-                <div className="text-xs text-gray-400">100% Secure</div>
+                <div className="font-semibold text-white mb-1">Secure Payment</div>
+                <div className="text-sm text-gray-400">100% protected</div>
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center">
-                <CreditCard className="w-6 h-6 text-blue-400" />
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
+                <CreditCard className="w-7 h-7 text-white" />
               </div>
               <div>
-                <div className="font-bold text-sm">EASY RETURNS</div>
-                <div className="text-xs text-gray-400">30-Day Policy</div>
+                <div className="font-semibold text-white mb-1">Easy Returns</div>
+                <div className="text-sm text-gray-400">30-day policy</div>
               </div>
             </div>
           </div>
@@ -69,150 +71,158 @@ const Footer = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Brand Column - Wider */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-black text-xl">B</span>
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-12">
+          {/* Brand Column */}
+          <div className="lg:col-span-4">
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 11h16M4 11c0-1.5 1-3 3-3h10c2 0 3 1.5 3 3M4 11v1c0 3 1 5 4 5h8c3 0 4-2 4-5v-1M7 8V7c0-1 .5-2 1.5-2h7c1 0 1.5 1 1.5 2v1" />
+                  </svg>
                 </div>
-                <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center">
-                  <span className="text-xs font-bold">🔥</span>
+                <div>
+                  <h2 className="text-2xl font-bold text-white">BurgerHub</h2>
+                  <p className="text-sm text-gray-400">Est. 2015</p>
                 </div>
               </div>
-              <div>
-                <h2 className="text-2xl font-black bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  BURGERHUB
-                </h2>
-                <p className="text-sm text-gray-400">Since 2015</p>
-              </div>
-            </div>
-            
-            <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
-              Crafting premium burgers with locally-sourced ingredients, cooked to perfection. 
-              Every bite tells our story of passion, quality, and flavor innovation.
-            </p>
-            
-            <div className="flex gap-4">
-              <a href="#" className="group">
-                <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors duration-300 group-hover:scale-110">
+              
+              <p className="text-gray-400 leading-relaxed mb-6">
+                Crafting premium burgers with locally-sourced ingredients, cooked to perfection. 
+                Every bite tells our story of passion, quality, and innovation.
+              </p>
+              
+              <div className="flex gap-3">
+                <a 
+                  href="#" 
+                  className="w-11 h-11 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/30 hover:-translate-y-1"
+                  aria-label="Facebook"
+                >
                   <Facebook className="w-5 h-5" />
-                </div>
-              </a>
-              <a href="#" className="group">
-                <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors duration-300 group-hover:scale-110">
+                </a>
+                <a 
+                  href="#" 
+                  className="w-11 h-11 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-sky-500 transition-all duration-300 hover:shadow-lg hover:shadow-sky-500/30 hover:-translate-y-1"
+                  aria-label="Twitter"
+                >
                   <Twitter className="w-5 h-5" />
-                </div>
-              </a>
-              <a href="#" className="group">
-                <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors duration-300 group-hover:scale-110">
+                </a>
+                <a 
+                  href="#" 
+                  className="w-11 h-11 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-all duration-300 hover:shadow-lg hover:shadow-pink-600/30 hover:-translate-y-1"
+                  aria-label="Instagram"
+                >
                   <Instagram className="w-5 h-5" />
-                </div>
-              </a>
-              <a href="#" className="group">
-                <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors duration-300 group-hover:scale-110">
-                  <span className="font-bold text-sm">T</span>
-                </div>
-              </a>
+                </a>
+                <a 
+                  href="#" 
+                  className="w-11 h-11 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-all duration-300 hover:shadow-lg hover:shadow-red-600/30 hover:-translate-y-1"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="w-5 h-5" />
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-6 pb-2 border-b border-gray-800">Explore</h3>
+          <div className="lg:col-span-2">
+            <h3 className="text-lg font-semibold text-white mb-6">Menu</h3>
             <ul className="space-y-3">
               {[
-                { text: "Full Menu", path: "/menu" },
-                { text: "Signature Burgers", path: "/menu/burgers" },
-                { text: "Family Meals", path: "/menu/family" },
-                { text: "Build Your Own", path: "/customize" },
-                { text: "Weekly Specials", path: "/deals" },
-                { text: "Catering", path: "/catering" }
+                "All Items",
+                "Signature Burgers",
+                "Family Meals",
+                "Build Your Own",
+                "Sides & Drinks",
+                "Desserts"
               ].map((item, idx) => (
                 <li key={idx}>
-                  <Link 
-                    to={item.path} 
-                    className="flex items-center gap-2 text-gray-400 hover:text-white group transition-colors duration-300"
+                  <a 
+                    href="#" 
+                    className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
                   >
                     <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span>{item.text}</span>
-                  </Link>
+                    {item}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Company */}
-          <div>
-            <h3 className="text-lg font-bold mb-6 pb-2 border-b border-gray-800">Company</h3>
+          <div className="lg:col-span-2">
+            <h3 className="text-lg font-semibold text-white mb-6">Company</h3>
             <ul className="space-y-3">
               {[
-                { text: "Our Story", path: "/about" },
-                { text: "Locations", path: "/locations" },
-                { text: "Careers", path: "/careers" },
-                { text: "Franchise Info", path: "/franchise" },
-                { text: "Press & Media", path: "/press" },
-                { text: "Food Safety", path: "/safety" }
+                "About Us",
+                "Locations",
+                "Careers",
+                "Franchise",
+                "Press",
+                "Sustainability"
               ].map((item, idx) => (
                 <li key={idx}>
-                  <Link 
-                    to={item.path} 
-                    className="flex items-center gap-2 text-gray-400 hover:text-white group transition-colors duration-300"
+                  <a 
+                    href="#" 
+                    className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
                   >
                     <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span>{item.text}</span>
-                  </Link>
+                    {item}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact & Hours */}
-          <div>
-            <h3 className="text-lg font-bold mb-6 pb-2 border-b border-gray-800">Contact</h3>
+          {/* Contact */}
+          <div className="lg:col-span-4">
+            <h3 className="text-lg font-semibold text-white mb-6">Contact Us</h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-red-600/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Phone className="w-4 h-4 text-red-400" />
+              <li className="flex items-start gap-3 group">
+                <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors duration-300">
+                  <Phone className="w-5 h-5 text-gray-400 group-hover:text-white" />
                 </div>
                 <div>
-                  <div className="font-medium">Call Us</div>
-                  <div className="text-gray-400 text-sm">(555) 123-4567</div>
+                  <div className="text-sm text-gray-500 mb-1">Phone</div>
+                  <a href="tel:5551234567" className="text-gray-300 hover:text-white transition-colors">(555) 123-4567</a>
                 </div>
               </li>
               
-              <li className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-blue-600/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Mail className="w-4 h-4 text-blue-400" />
+              <li className="flex items-start gap-3 group">
+                <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors duration-300">
+                  <Mail className="w-5 h-5 text-gray-400 group-hover:text-white" />
                 </div>
                 <div>
-                  <div className="font-medium">Email</div>
-                  <div className="text-gray-400 text-sm">hello@burgerhub.com</div>
+                  <div className="text-sm text-gray-500 mb-1">Email</div>
+                  <a href="mailto:hello@burgerhub.com" className="text-gray-300 hover:text-white transition-colors">Made by Geekstechnologies911@gmail.com</a>
                 </div>
               </li>
               
-              <li className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-green-600/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <MapPin className="w-4 h-4 text-green-400" />
+              <li className="flex items-start gap-3 group">
+                <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors duration-300">
+                  <MapPin className="w-5 h-5 text-gray-400 group-hover:text-white" />
                 </div>
                 <div>
-                  <div className="font-medium">Visit Us</div>
-                  <div className="text-gray-400 text-sm">123 Burger Street<br />Food City, FC 12345</div>
+                  <div className="text-sm text-gray-500 mb-1">Address</div>
+                  <div className="text-gray-300">
+                    123 Burger Street<br />
+                    Food City, FC 12345
+                  </div>
                 </div>
               </li>
               
-              <li className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-yellow-600/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Clock className="w-4 h-4 text-yellow-400" />
+              <li className="flex items-start gap-3 group">
+                <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors duration-300">
+                  <Clock className="w-5 h-5 text-gray-400 group-hover:text-white" />
                 </div>
                 <div>
-                  <div className="font-medium">Hours</div>
-                  <div className="text-gray-400 text-sm">
-                    Mon-Thu: 11am-11pm<br />
-                    Fri-Sat: 11am-2am<br />
-                    Sun: 12pm-10pm
+                  <div className="text-sm text-gray-500 mb-1">Hours</div>
+                  <div className="text-gray-300 text-sm">
+                    Mon-Thu: 11am - 11pm<br />
+                    Fri-Sat: 11am - 2am<br />
+                    Sun: 12pm - 10pm
                   </div>
                 </div>
               </li>
@@ -221,93 +231,100 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Section */}
-        <div className="mt-12 pt-8 border-t border-gray-800">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold mb-2">Get the Juiciest Deals</h3>
-              <p className="text-gray-400">Subscribe for exclusive offers, new menu items, and members-only discounts.</p>
+        <div className="py-12 border-y border-gray-800">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl mb-6 shadow-lg">
+              <Mail className="w-8 h-8 text-white" />
             </div>
+            <h3 className="text-3xl font-bold text-white mb-3">Stay Updated</h3>
+            <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+              Subscribe to our newsletter for exclusive offers, new menu items, and special promotions delivered to your inbox.
+            </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-grow">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-6 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-red-500 transition-colors"
-                />
-              </div>
-              <button className="px-8 py-3 bg-gradient-to-r from-red-600 to-orange-500 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300">
-                Subscribe Now
+            <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-6 py-4 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-gray-600 focus:bg-gray-750 transition-all"
+              />
+              <button className="px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold rounded-xl hover:from-gray-600 hover:to-gray-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                <Mail className="w-5 h-5" />
+                Subscribe
               </button>
             </div>
             
-            <p className="text-xs text-gray-500 text-center mt-4">
-              By subscribing, you agree to our Privacy Policy. You may unsubscribe at any time.
+            <p className="text-xs text-gray-500 mt-4">
+              By subscribing, you agree to our Privacy Policy and consent to receive updates.
             </p>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-gray-500 text-sm">
+        <div className="pt-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-6 mb-6">
+            <div className="text-gray-400 text-sm">
               © {currentYear} BurgerHub. All rights reserved.
             </div>
             
-            <div className="flex items-center gap-6 text-sm">
-              <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 Privacy Policy
-              </Link>
-              <Link to="/terms" className="text-gray-400 hover:text-white transition-colors">
+              </a>
+              <span className="text-gray-700">•</span>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 Terms of Service
-              </Link>
-              <Link to="/cookies" className="text-gray-400 hover:text-white transition-colors">
+              </a>
+              <span className="text-gray-700">•</span>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 Cookie Policy
-              </Link>
-              <Link to="/accessibility" className="text-gray-400 hover:text-white transition-colors">
+              </a>
+              <span className="text-gray-700">•</span>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 Accessibility
-              </Link>
+              </a>
             </div>
             
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <span>Made with</span>
-              <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-              <span>for burger lovers</span>
+              <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+              <span>by our team</span>
             </div>
-          </div>
-          
-          <div className="mt-4 text-center text-xs text-gray-600">
-            BurgerHub® is a registered trademark. All menu items and promotions are subject to availability.
           </div>
         </div>
       </div>
 
       {/* Download Apps Banner */}
-      <div className="bg-black border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-red-600 to-orange-500 rounded-lg"></div>
+      <div className="border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center shadow-lg">
+                <Smartphone className="w-6 h-6 text-white" />
+              </div>
               <div>
-                <div className="font-bold">Get the App</div>
-                <div className="text-xs text-gray-400">Order faster, earn rewards</div>
+                <div className="font-semibold text-white">Download Our App</div>
+                <div className="text-sm text-gray-400">Order faster, earn rewards</div>
               </div>
             </div>
             
             <div className="flex gap-4">
-              <button className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-                <div className="w-6 h-6 bg-white rounded"></div>
+              <button className="flex items-center gap-3 px-5 py-3 bg-gray-800 rounded-xl hover:bg-gray-700 transition-all duration-300 group border border-gray-700">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                  <Download className="w-5 h-5 text-gray-900" />
+                </div>
                 <div className="text-left">
-                  <div className="text-xs">Download on</div>
-                  <div className="font-bold text-sm">App Store</div>
+                  <div className="text-xs text-gray-400">Download on</div>
+                  <div className="font-semibold text-white">App Store</div>
                 </div>
               </button>
               
-              <button className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-                <div className="w-6 h-6 bg-green-500 rounded"></div>
+              <button className="flex items-center gap-3 px-5 py-3 bg-gray-800 rounded-xl hover:bg-gray-700 transition-all duration-300 group border border-gray-700">
+                <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                  <Download className="w-5 h-5 text-white" />
+                </div>
                 <div className="text-left">
-                  <div className="text-xs">Get it on</div>
-                  <div className="font-bold text-sm">Google Play</div>
+                  <div className="text-xs text-gray-400">Get it on</div>
+                  <div className="font-semibold text-white">Google Play</div>
                 </div>
               </button>
             </div>
