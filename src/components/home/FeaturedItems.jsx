@@ -13,7 +13,8 @@ const FeaturedItems = () => {
       rating: 4.9,
       time: "20 min",
       tags: ["🔥 HOT", "NEW"],
-      image: "🍔🍔🍔"
+      image: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=800&h=600&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.5",
+      alt: "Triple cheeseburger with bacon"
     },
     {
       id: 2,
@@ -23,7 +24,8 @@ const FeaturedItems = () => {
       rating: 4.7,
       time: "15 min",
       tags: ["BESTSELLER"],
-      image: "🍟"
+      image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800&h=600&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.6",
+      alt: "Loaded fries with cheese sauce"
     },
     {
       id: 3,
@@ -33,7 +35,8 @@ const FeaturedItems = () => {
       rating: 4.8,
       time: "18 min",
       tags: ["🌶️ SPICY"],
-      image: "🍗"
+      image: "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=800&h=600&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.5",
+      alt: "Spicy fried chicken sandwich"
     }
   ];
 
@@ -49,8 +52,15 @@ const FeaturedItems = () => {
           {featuredItems.map((item) => (
             <div key={item.id} className="bg-gradient-to-b from-white to-gray-50 rounded-2xl border-2 border-gray-200 p-6 hover:border-red-200 hover:shadow-xl transition-all duration-300 group">
               <div className="mb-6">
-                <div className="h-40 bg-gradient-to-r from-yellow-100 to-red-100 rounded-xl flex items-center justify-center mb-4">
-                  <span className="text-8xl transform group-hover:scale-110 transition-transform duration-300">{item.image}</span>
+                {/* Image container - UPDATED */}
+                <div className="h-40 rounded-xl overflow-hidden mb-4 relative">
+                  <img 
+                    src={item.image} 
+                    alt={item.alt}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Gradient overlay for better text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 
                 <div className="flex items-center justify-between mb-3">

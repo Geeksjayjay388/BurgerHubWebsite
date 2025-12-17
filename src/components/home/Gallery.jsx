@@ -10,42 +10,42 @@ const Gallery = () => {
       id: 1,
       title: "Juicy Burgers",
       description: "Fresh off the grill",
-      emoji: "🍔",
+      imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&h=800&fit=crop",
       color: "from-red-500 to-yellow-500"
     },
     {
       id: 2,
       title: "Crispy Fries",
-      description: "Golden perfection",
-      emoji: "🍟",
+      description: "Golden perfection", 
+      imageUrl: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=1200&h=800&fit=crop",
       color: "from-yellow-500 to-orange-500"
     },
     {
       id: 3,
       title: "Refreshing Drinks",
       description: "Ice cold beverages",
-      emoji: "🥤",
+      imageUrl: "https://images.unsplash.com/photo-1437418747212-8d9709afab22?w=1200&h=800&fit=crop",
       color: "from-blue-400 to-cyan-400"
     },
     {
       id: 4,
       title: "Creamy Shakes",
       description: "Hand-spun delights",
-      emoji: "🍦",
+      imageUrl: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=1200&h=800&fit=crop",
       color: "from-pink-400 to-purple-400"
     },
     {
       id: 5,
       title: "Chicken Specials",
       description: "Crispy & delicious",
-      emoji: "🍗",
+      imageUrl: "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=1200&h=800&fit=crop",
       color: "from-orange-500 to-red-500"
     },
     {
       id: 6,
       title: "Fresh Salads",
       description: "Healthy options",
-      emoji: "🥗",
+      imageUrl: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200&h=800&fit=crop",
       color: "from-green-400 to-emerald-500"
     }
   ];
@@ -70,12 +70,14 @@ const Gallery = () => {
             <button
               onClick={prevSlide}
               className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white transition-colors"
+              aria-label="Previous slide"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={nextSlide}
               className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white transition-colors"
+              aria-label="Next slide"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -100,10 +102,17 @@ const Gallery = () => {
                     : 'opacity-0 translate-x-full'
                 }`}
               >
-                <div className={`h-full bg-gradient-to-br ${item.color} flex flex-col items-center justify-center p-8`}>
-                  <span className="text-9xl mb-6">{item.emoji}</span>
-                  <h3 className="text-3xl font-black mb-2">{item.title}</h3>
-                  <p className="text-xl opacity-90">{item.description}</p>
+                <div className="relative h-full">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-60`} />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                    <h3 className="text-3xl font-black mb-2">{item.title}</h3>
+                    <p className="text-xl opacity-90">{item.description}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -121,12 +130,17 @@ const Gallery = () => {
                   ? 'ring-4 ring-red-500 scale-105'
                   : 'opacity-70 hover:opacity-100 hover:scale-102'
               }`}
+              aria-label={`View ${item.title}`}
+              aria-current={index === activeIndex ? "true" : "false"}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${item.color} flex items-center justify-center`}>
-                <span className="text-4xl">{item.emoji}</span>
-              </div>
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                className="w-full h-full object-cover"
+              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-50`} />
               <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">{item.title}</span>
+                <span className="text-white font-bold text-sm px-2 text-center">{item.title}</span>
               </div>
             </button>
           ))}
