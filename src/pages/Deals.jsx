@@ -1,205 +1,212 @@
 // pages/Deals.jsx
 import React from 'react';
-import { Timer, Zap, Tag, CheckCircle } from 'lucide-react';
+import { Timer, Tag, Clock, Users, Moon, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Deals = () => {
   const deals = [
     {
       id: 1,
-      title: "HAPPY HOUR",
-      description: "50% off all drinks",
+      title: "Happy Hour Special",
+      description: "Half price on all beverages",
       time: "3PM - 6PM Daily",
-      price: null,
       discount: "50% OFF",
-      tag: "DAILY DEAL",
-      highlight: true
+      tag: "DAILY",
+      icon: Clock,
+      color: "blue"
     },
     {
       id: 2,
-      title: "FAMILY BUNDLE",
+      title: "Family Bundle",
       description: "4 Burgers + Large Fries + 4 Drinks",
       originalPrice: 45.96,
       price: 32.99,
-      discount: "SAVE $12",
-      tag: "BEST VALUE",
+      savings: 12.97,
+      tag: "POPULAR",
+      icon: Users,
+      color: "red",
       popular: true
     },
     {
       id: 3,
-      title: "DOUBLE DATE",
+      title: "Double Date Deal",
       description: "2 Burgers + 2 Sides + 2 Drinks",
       originalPrice: 34.97,
       price: 24.99,
-      discount: "28% OFF",
-      tag: "PERFECT PAIR"
+      savings: 9.98,
+      tag: "COUPLES",
+      icon: Users,
+      color: "purple"
     },
     {
       id: 4,
-      title: "STUDENT SPECIAL",
-      description: "Burger + Fries + Drink",
+      title: "Student Discount",
+      description: "Burger + Fries + Drink with valid student ID",
       originalPrice: 22.97,
       price: 15.99,
-      discount: "30% OFF",
-      tag: "STUDENTS ONLY",
-      requirements: "Valid student ID required"
+      savings: 6.98,
+      tag: "STUDENTS",
+      icon: Tag,
+      color: "green",
+      note: "Valid student ID required"
     },
     {
       id: 5,
-      title: "MIDNIGHT MUNCHIES",
-      description: "Any burger after 10PM",
+      title: "Late Night Special",
+      description: "Any signature burger after 10PM",
       time: "10PM - 2AM",
       price: 9.99,
       originalPrice: 12.99,
-      discount: "23% OFF",
-      tag: "LATE NIGHT"
+      tag: "NIGHT OWL",
+      icon: Moon,
+      color: "indigo"
     },
     {
       id: 6,
-      title: "COMBO UPGRADE",
-      description: "Upgrade any meal to large",
+      title: "Size Upgrade",
+      description: "Upgrade any combo to large size",
       price: 1.99,
       originalPrice: 2.99,
-      discount: "33% OFF",
-      tag: "ADD-ON"
+      tag: "ADD-ON",
+      icon: Plus,
+      color: "orange"
     }
   ];
 
+  const colorClasses = {
+    blue: { bg: 'bg-blue-50', text: 'text-blue-600', badge: 'bg-blue-100 text-blue-700' },
+    red: { bg: 'bg-red-50', text: 'text-red-600', badge: 'bg-red-100 text-red-700' },
+    purple: { bg: 'bg-purple-50', text: 'text-purple-600', badge: 'bg-purple-100 text-purple-700' },
+    green: { bg: 'bg-green-50', text: 'text-green-600', badge: 'bg-green-100 text-green-700' },
+    indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600', badge: 'bg-indigo-100 text-indigo-700' },
+    orange: { bg: 'bg-orange-50', text: 'text-orange-600', badge: 'bg-orange-100 text-orange-700' }
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 mb-4">
-          <Zap className="w-6 h-6 text-yellow-500" />
-          <span className="text-yellow-500 font-bold">HOT DEALS</span>
+    <div className="bg-gray-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Special Offers
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Save more with our exclusive deals and limited-time promotions
+          </p>
         </div>
-        <h1 className="text-5xl font-black text-black mb-4">SPECIAL OFFERS</h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Don't miss out on these limited-time offers. Our best deals updated daily!
-        </p>
-      </div>
 
-      {/* Stats Bar */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-        <div className="bg-red-50 p-4 rounded-2xl text-center">
-          <div className="text-2xl font-black text-red-600 mb-1">12</div>
-          <div className="text-sm text-gray-600">Active Deals</div>
-        </div>
-        <div className="bg-yellow-50 p-4 rounded-2xl text-center">
-          <div className="text-2xl font-black text-yellow-600 mb-1">48</div>
-          <div className="text-sm text-gray-600">Hours Left</div>
-        </div>
-        <div className="bg-green-50 p-4 rounded-2xl text-center">
-          <div className="text-2xl font-black text-green-600 mb-1">$5K+</div>
-          <div className="text-sm text-gray-600">Total Savings</div>
-        </div>
-        <div className="bg-blue-50 p-4 rounded-2xl text-center">
-          <div className="text-2xl font-black text-blue-600 mb-1">2.4K</div>
-          <div className="text-sm text-gray-600">Deals Claimed</div>
-        </div>
-      </div>
-
-      {/* Deals Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {deals.map((deal) => (
-          <div
-            key={deal.id}
-            className={`rounded-2xl overflow-hidden border-2 ${
-              deal.highlight
-                ? 'border-yellow-400 shadow-xl'
-                : deal.popular
-                ? 'border-red-400'
-                : 'border-gray-200'
-            } hover:shadow-2xl transition-all duration-300`}
-          >
-            {/* Deal Header */}
-            <div className={`p-6 ${
-              deal.highlight
-                ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-black'
-                : deal.popular
-                ? 'bg-gradient-to-r from-red-500 to-red-600 text-white'
-                : 'bg-gradient-to-r from-gray-900 to-black text-white'
-            }`}>
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-bold mb-2">
-                    {deal.tag}
-                  </span>
-                  {deal.popular && (
-                    <span className="inline-block ml-2 px-3 py-1 bg-white text-red-600 rounded-full text-sm font-bold">
-                      🔥 MOST POPULAR
+        {/* Deals Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {deals.map((deal) => {
+            const Icon = deal.icon;
+            const colors = colorClasses[deal.color];
+            
+            return (
+              <div
+                key={deal.id}
+                className={`bg-white rounded-xl overflow-hidden border ${
+                  deal.popular ? 'border-red-200 shadow-lg' : 'border-gray-200'
+                } hover:shadow-xl transition-shadow`}
+              >
+                {/* Card Header */}
+                <div className={`${colors.bg} p-6`}>
+                  <div className="flex items-start justify-between mb-3">
+                    <div className={`w-10 h-10 ${colors.badge} rounded-lg flex items-center justify-center`}>
+                      <Icon className={`w-5 h-5 ${colors.text}`} />
+                    </div>
+                    <span className={`px-3 py-1 ${colors.badge} rounded-full text-xs font-semibold`}>
+                      {deal.tag}
                     </span>
+                  </div>
+                  {deal.popular && (
+                    <div className="inline-block px-3 py-1 bg-red-600 text-white rounded-full text-xs font-semibold mb-2">
+                      Most Popular
+                    </div>
                   )}
-                  <h3 className="text-2xl font-black">{deal.title}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {deal.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {deal.description}
+                  </p>
                 </div>
-                {deal.discount && (
-                  <div className="text-right">
-                    <div className="text-3xl font-black">{deal.discount}</div>
-                  </div>
-                )}
+
+                {/* Card Body */}
+                <div className="p-6">
+                  {deal.time && (
+                    <div className="flex items-center gap-2 text-gray-600 mb-4 text-sm">
+                      <Timer className="w-4 h-4" />
+                      <span>{deal.time}</span>
+                    </div>
+                  )}
+
+                  {deal.note && (
+                    <p className="text-sm text-gray-500 mb-4">{deal.note}</p>
+                  )}
+
+                  {deal.price !== undefined && (
+                    <div className="mb-6">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold text-gray-900">
+                          ${deal.price.toFixed(2)}
+                        </span>
+                        {deal.originalPrice && (
+                          <span className="text-lg text-gray-400 line-through">
+                            ${deal.originalPrice.toFixed(2)}
+                          </span>
+                        )}
+                      </div>
+                      {deal.savings && (
+                        <p className={`text-sm ${colors.text} font-semibold mt-1`}>
+                          Save ${deal.savings.toFixed(2)}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {deal.discount && !deal.price && (
+                    <div className="mb-6">
+                      <div className={`text-2xl font-bold ${colors.text}`}>
+                        {deal.discount}
+                      </div>
+                    </div>
+                  )}
+
+                  <button className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                    Claim Offer
+                  </button>
+                </div>
               </div>
-              <p className="opacity-90">{deal.description}</p>
+            );
+          })}
+        </div>
+
+        {/* Newsletter Section */}
+        <div className="bg-white rounded-2xl p-8 lg:p-12 border border-gray-200">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <Tag className="w-6 h-6 text-red-600" />
             </div>
-
-            {/* Deal Details */}
-            <div className="bg-white p-6">
-              {deal.time && (
-                <div className="flex items-center gap-2 mb-4 text-gray-600">
-                  <Timer className="w-4 h-4" />
-                  <span className="font-medium">{deal.time}</span>
-                </div>
-              )}
-
-              {deal.requirements && (
-                <div className="text-sm text-gray-500 mb-4">
-                  <CheckCircle className="w-4 h-4 inline mr-1" />
-                  {deal.requirements}
-                </div>
-              )}
-
-              <div className="flex items-center justify-between mb-6">
-                {deal.price !== null && (
-                  <div>
-                    <div className="text-3xl font-black text-black">${deal.price.toFixed(2)}</div>
-                    {deal.originalPrice && (
-                      <div className="text-gray-500 line-through">${deal.originalPrice.toFixed(2)}</div>
-                    )}
-                  </div>
-                )}
-                {deal.time && !deal.price && (
-                  <div className="text-2xl font-black text-black">{deal.time}</div>
-                )}
-              </div>
-
-              <button className="w-full bg-black text-white py-3 rounded-xl font-bold hover:bg-gray-800 transition-colors">
-                CLAIM THIS DEAL
+            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
+              Get Exclusive Deals
+            </h2>
+            <p className="text-gray-600 mb-8">
+              Subscribe to our newsletter for early access to new deals and special promotions
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+              />
+              <button className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors whitespace-nowrap">
+                Subscribe
               </button>
             </div>
+            <p className="text-sm text-gray-500 mt-4">
+              Unsubscribe anytime. We respect your privacy.
+            </p>
           </div>
-        ))}
-      </div>
-
-      {/* CTA Section */}
-      <div className="mt-16 text-center">
-        <div className="bg-gradient-to-r from-red-50 to-yellow-50 rounded-3xl p-8 max-w-3xl mx-auto">
-          <Tag className="w-12 h-12 text-red-600 mx-auto mb-4" />
-          <h3 className="text-2xl font-black text-black mb-2">MISSING A DEAL?</h3>
-          <p className="text-gray-600 mb-6">
-            Sign up for our newsletter to get exclusive deals delivered to your inbox
-          </p>
-          <div className="flex max-w-md mx-auto gap-3">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-grow px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-red-600"
-            />
-            <button className="bg-red-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-colors">
-              SIGN UP
-            </button>
-          </div>
-          <p className="text-sm text-gray-500 mt-4">
-            No spam, just delicious deals. Unsubscribe anytime.
-          </p>
         </div>
       </div>
     </div>
