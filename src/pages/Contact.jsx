@@ -1,6 +1,7 @@
 // pages/Contact.jsx
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, Navigation, Star } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, Navigation, Star, MessageSquare, Heart } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -57,205 +58,233 @@ const Contact = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-black text-black mb-4">GET IN TOUCH</h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Have questions, feedback, or just want to say hi? We'd love to hear from you!
-        </p>
-      </div>
+    <div className="min-h-screen bg-[#050505] relative overflow-hidden pt-20">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-red-900/10 blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-900/10 blur-[130px] pointer-events-none" />
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* Contact Information */}
-        <div className="lg:col-span-1 space-y-6">
-          {/* Contact Cards */}
-          <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-2xl border-2 border-red-100">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                <Phone className="w-6 h-6 text-red-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-black">Call Us</h3>
-                <p className="text-gray-600">Speak with our team</p>
-              </div>
-            </div>
-            <div className="text-2xl font-black text-black">(555) 123-4567</div>
-            <p className="text-sm text-gray-500 mt-2">Available 7AM - 11PM daily</p>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 py-16 relative z-10">
+        {/* Hero Section */}
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center justify-center w-16 h-16 bg-white/5 rounded-full mb-6 border border-white/10"
+          >
+            <MessageSquare className="w-8 h-8 text-white" />
+          </motion.div>
 
-          <div className="bg-gradient-to-br from-yellow-50 to-white p-6 rounded-2xl border-2 border-yellow-100">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                <Mail className="w-6 h-6 text-yellow-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-black">Email Us</h3>
-                <p className="text-gray-600">For general inquiries</p>
-              </div>
-            </div>
-            <div className="text-lg font-bold text-black">hello@burgerhub.com</div>
-            <p className="text-sm text-gray-500 mt-2">Typically respond within 24 hours</p>
-          </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tight"
+          >
+            LET'S <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">CONNECT</span>
+          </motion.h1>
 
-          <div className="bg-gradient-to-br from-black to-gray-900 text-white p-6 rounded-2xl">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
-                <Clock className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-bold">Business Hours</h3>
-                <p className="text-gray-300">All locations</p>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span>Monday - Friday</span>
-                <span className="font-bold">7AM - 11PM</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Saturday - Sunday</span>
-                <span className="font-bold">8AM - 11PM</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Emergency Contact */}
-          <div className="bg-gradient-to-r from-red-600 to-red-500 text-white p-6 rounded-2xl">
-            <h3 className="font-bold text-lg mb-2">🍔 Order Issues?</h3>
-            <p className="text-sm opacity-90 mb-4">
-              Experiencing problems with your order? We're here to help immediately.
-            </p>
-            <button className="w-full bg-white text-red-600 py-2 rounded-lg font-bold hover:bg-gray-100 transition-colors">
-              REPORT ORDER ISSUE
-            </button>
-          </div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl text-gray-400 max-w-2xl mx-auto"
+          >
+            We'd love to hear from you. Whether you have a question about our menu, need assistance, or just want to give feedback.
+          </motion.p>
         </div>
 
-        {/* Locations */}
-        <div className="lg:col-span-2">
-          <h2 className="text-3xl font-black text-black mb-6">OUR LOCATIONS</h2>
-          <div className="space-y-6">
-            {locations.map((location) => (
-              <div key={location.id} className="bg-white rounded-2xl border-2 border-gray-200 p-6 hover:shadow-xl transition-all duration-300">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-black mb-2">{location.name}</h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span className="font-bold">{location.rating}</span>
-                      <span className="text-gray-600 text-sm">({location.reviews} reviews)</span>
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="lg:col-span-1 space-y-6"
+          >
+            {/* Contact Cards */}
+            <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors group">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-red-500/20 rounded-2xl flex items-center justify-center border border-red-500/30">
+                  <Phone className="w-6 h-6 text-red-500" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-lg">Call Us</h3>
+                  <p className="text-gray-400 text-sm">Mon-Fri from 8am to 5pm</p>
+                </div>
+              </div>
+              <div className="text-2xl font-black text-white group-hover:text-red-500 transition-colors">(555) 123-4567</div>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors group">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center border border-blue-500/30">
+                  <Mail className="w-6 h-6 text-blue-500" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-lg">Email Us</h3>
+                  <p className="text-gray-400 text-sm">For general inquiries</p>
+                </div>
+              </div>
+              <div className="text-lg font-bold text-white group-hover:text-blue-500 transition-colors">hello@burgerhub.com</div>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#111] to-black p-6 rounded-3xl border border-white/10">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center border border-white/5">
+                  <Clock className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-lg">Opening Hours</h3>
+                  <p className="text-gray-400 text-sm">Come visit us</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center border-b border-white/5 pb-2">
+                  <span className="text-gray-400">Monday - Friday</span>
+                  <span className="font-bold text-white">7AM - 11PM</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Saturday - Sunday</span>
+                  <span className="font-bold text-white">8AM - 11PM</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Emergency Contact */}
+            <div className="bg-gradient-to-r from-red-600 to-orange-600 p-6 rounded-3xl relative overflow-hidden">
+              <div className="relative z-10">
+                <h3 className="font-black text-white text-xl mb-2 flex items-center gap-2">
+                  <Heart className="w-5 h-5 fill-white" />
+                  Order Issues?
+                </h3>
+                <p className="text-white/80 text-sm mb-4 leading-relaxed">
+                  Experiencing problems with your order? We're here to help immediately.
+                </p>
+                <button className="w-full bg-white text-red-600 py-3 rounded-xl font-bold hover:shadow-lg transition-all text-sm">
+                  REPORT AN ISSUE
+                </button>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Locations & Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="lg:col-span-2 space-y-8"
+          >
+            {/* Locations */}
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <MapPin className="w-6 h-6 text-red-500" />
+                Our Locations
+              </h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {locations.map((location) => (
+                  <div key={location.id} className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 hover:border-red-500/30 transition-all group">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-lg font-bold text-white group-hover:text-red-500 transition-colors">{location.name}</h3>
+                        <div className="flex items-center gap-1.5 mt-1">
+                          <Star className="w-3.5 h-3.5 fill-yellow-500 text-yellow-500" />
+                          <span className="font-bold text-white text-sm">{location.rating}</span>
+                          <span className="text-gray-500 text-xs">({location.reviews})</span>
+                        </div>
+                      </div>
+                      <button className="p-2 bg-white/5 rounded-lg text-white hover:bg-white/20 transition-colors">
+                        <Navigation className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    <div className="space-y-2 mb-4">
+                      <p className="text-gray-400 text-sm flex items-center gap-2">
+                        <MapPin className="w-3.5 h-3.5" /> {location.address}
+                      </p>
+                      <p className="text-gray-400 text-sm flex items-center gap-2">
+                        <Phone className="w-3.5 h-3.5" /> {location.phone}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {location.features.map((feature, idx) => (
+                        <span key={idx} className="px-2 py-1 bg-white/5 rounded-md text-[10px] font-bold text-gray-400 border border-white/5">
+                          {feature.toUpperCase()}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                  <button className="mt-2 md:mt-0 bg-black text-white px-6 py-2 rounded-full font-bold hover:bg-gray-800 transition-colors flex items-center gap-2">
-                    <Navigation className="w-4 h-4" />
-                    GET DIRECTIONS
-                  </button>
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-4 mb-4">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{location.address}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Phone className="w-4 h-4" />
-                    <span className="text-sm">{location.phone}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Clock className="w-4 h-4" />
-                    <span className="text-sm">{location.hours}</span>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {location.features.map((feature, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* Contact Form */}
-          <div className="mt-12">
-            <h2 className="text-3xl font-black text-black mb-6">SEND US A MESSAGE</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Your Name
-                  </label>
+            {/* Contact Form */}
+            <div className="bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 p-8">
+              <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-gray-400 ml-1">Your Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-xl text-white focus:outline-none focus:border-red-500/50 focus:bg-black/60 transition-all"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-gray-400 ml-1">Email Address</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-xl text-white focus:outline-none focus:border-red-500/50 focus:bg-black/60 transition-all"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-gray-400 ml-1">Subject</label>
                   <input
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="subject"
+                    value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-red-600"
-                    placeholder="Enter your name"
+                    className="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-xl text-white focus:outline-none focus:border-red-500/50 focus:bg-black/60 transition-all"
+                    placeholder="How can we help you?"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-gray-400 ml-1">Message</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-red-600"
-                    placeholder="name@example.com"
+                    rows="5"
+                    className="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-xl text-white focus:outline-none focus:border-red-500/50 focus:bg-black/60 transition-all resize-none"
+                    placeholder="Typing..."
                   />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-red-600"
-                  placeholder="How can we help?"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows="6"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-red-600 resize-none"
-                  placeholder="Tell us what's on your mind..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="bg-red-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-colors flex items-center gap-2"
-              >
-                <Send className="w-5 h-5" />
-                SEND MESSAGE
-              </button>
-            </form>
-          </div>
+                <button
+                  type="submit"
+                  className="w-full bg-white text-black py-4 rounded-xl font-black text-lg hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Send className="w-5 h-5" />
+                  SEND MESSAGE
+                </button>
+              </form>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

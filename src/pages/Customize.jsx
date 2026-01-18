@@ -1,5 +1,7 @@
+// pages/Customize.jsx
 import React, { useState } from 'react';
-import { Check, RotateCcw, ShoppingCart, Plus, AlertCircle } from 'lucide-react';
+import { Check, RotateCcw, ShoppingCart, AlertCircle, ChefHat, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Customize = () => {
   const [burger, setBurger] = useState({
@@ -14,6 +16,7 @@ const Customize = () => {
 
   const [addedToCart, setAddedToCart] = useState(false);
 
+  // Data structure kept same as original for compatibility
   const ingredients = {
     bases: [
       { name: 'Classic Beef', price: 0, icon: 'beef' },
@@ -58,41 +61,29 @@ const Customize = () => {
 
   const calculatePrice = () => {
     let price = 12.99;
-    
     const selectedBase = ingredients.bases.find(b => b.name === burger.base);
     price += selectedBase?.price || 0;
-    
     const selectedCheese = ingredients.cheeses.find(c => c.name === burger.cheese);
     price += selectedCheese?.price || 0;
-    
     burger.toppings.forEach(toppingName => {
       const topping = ingredients.toppings.find(t => t.name === toppingName);
       price += topping?.price || 0;
     });
-    
     burger.sauces.forEach(sauceName => {
       const sauce = ingredients.sauces.find(s => s.name === sauceName);
       price += sauce?.price || 0;
     });
-    
     const selectedSize = ingredients.sizes.find(s => s.name === burger.size);
     price += selectedSize?.price || 0;
-    
     return price.toFixed(2);
   };
 
   const toggleTopping = (toppingName) => {
     setBurger(prev => {
       if (prev.toppings.includes(toppingName)) {
-        return {
-          ...prev,
-          toppings: prev.toppings.filter(t => t !== toppingName)
-        };
+        return { ...prev, toppings: prev.toppings.filter(t => t !== toppingName) };
       } else {
-        return {
-          ...prev,
-          toppings: [...prev.toppings, toppingName]
-        };
+        return { ...prev, toppings: [...prev.toppings, toppingName] };
       }
     });
   };
@@ -100,15 +91,9 @@ const Customize = () => {
   const toggleSauce = (sauceName) => {
     setBurger(prev => {
       if (prev.sauces.includes(sauceName)) {
-        return {
-          ...prev,
-          sauces: prev.sauces.filter(s => s !== sauceName)
-        };
+        return { ...prev, sauces: prev.sauces.filter(s => s !== sauceName) };
       } else {
-        return {
-          ...prev,
-          sauces: [...prev.sauces, sauceName]
-        };
+        return { ...prev, sauces: [...prev.sauces, sauceName] };
       }
     });
   };
@@ -131,350 +116,321 @@ const Customize = () => {
   };
 
   const getIngredientCount = () => {
-    return burger.toppings.length + burger.sauces.length + 3; // +3 for base, cheese, size
+    return burger.toppings.length + burger.sauces.length + 3;
   };
 
+  // Helper for ingredient visualizer logic remains same but improved visuals
+  const IngredientLayer = ({ colorStart, colorEnd, height = "h-4", className = "", style = {} }) => (
+    <motion.div
+      initial={{ scale: 0.8, opacity: 0, y: -20 }}
+      animate={{ scale: 1, opacity: 1, y: 0 }}
+      className={`w-48 ${height} rounded-full shadow-lg mx-auto my-[1px] relative overflow-hidden ring-1 ring-black/10 ${className}`}
+      style={{
+        background: `linear-gradient(to bottom, ${colorStart}, ${colorEnd})`,
+        ...style
+      }}
+    />
+  );
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="min-h-screen bg-[#050505] relative overflow-hidden pt-20">
+      {/* Background Ambience */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-900/10 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-900/10 blur-[120px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl mb-4 shadow-lg">
-            <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 11h16M4 11c0-1.5 1-3 3-3h10c2 0 3 1.5 3 3M4 11v1c0 3 1 5 4 5h8c3 0 4-2 4-5v-1M7 8V7c0-1 .5-2 1.5-2h7c1 0 1.5 1 1.5 2v1" />
-            </svg>
-          </div>
-          <h1 className="text-5xl font-bold text-gray-900 mb-3">Build Your Burger</h1>
-          <p className="text-xl text-gray-600">Customize every detail to create your perfect meal</p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center justify-center w-16 h-16 bg-white/5 rounded-2xl mb-6 shadow-lg border border-white/10"
+          >
+            <ChefHat className="w-8 h-8 text-white" />
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl font-black text-white mb-4 tracking-tight"
+          >
+            BUILD YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">LEGEND</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-400 text-lg"
+          >
+            Masterpiece or monster? You decide the ingredients.
+          </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left: Burger Preview */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Visual Preview Card */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-              <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6">
-                <div className="flex items-center justify-between text-white">
-                  <div>
-                    <h2 className="text-2xl font-bold mb-1">Your Creation</h2>
-                    <p className="text-gray-300 text-sm">{getIngredientCount()} ingredients selected</p>
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
+          {/* Left: Burger Preview (Sticky) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden relative">
+              {/* Stats Bar */}
+              <div className="p-6 border-b border-white/5 flex items-center justify-between bg-black/20">
+                <div>
+                  <h2 className="text-xl font-bold text-white mb-1">Preview</h2>
+                  <p className="text-gray-400 text-xs flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {getIngredientCount()} layers
+                  </p>
+                </div>
+                <div className="text-right">
+                  <div className="flex items-baseline justify-end gap-1">
+                    <span className="text-3xl font-black text-white">${calculatePrice()}</span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-bold">${calculatePrice()}</div>
-                    <div className="text-gray-300 text-sm">Total</div>
-                  </div>
+                  <div className="text-gray-400 text-xs uppercase tracking-wider font-bold">Total</div>
                 </div>
               </div>
 
-              {/* Burger Visualization */}
-              <div className="p-12 bg-gradient-to-b from-gray-50 to-white">
-                <div className="flex flex-col items-center gap-2 max-w-md mx-auto">
-                  {/* Top Bun */}
-                  <div className="w-full max-w-xs">
-                    <div className="h-14 bg-gradient-to-b from-amber-300 to-amber-400 rounded-t-full border-b-4 border-amber-500 shadow-md"></div>
-                  </div>
-                  
-                  {/* Sauces Layer */}
-                  {burger.sauces.length > 0 && (
-                    <div className="w-full max-w-xs px-4">
-                      <div className="h-3 bg-gradient-to-r from-red-300 via-red-400 to-red-300 rounded-full shadow-sm"></div>
-                    </div>
-                  )}
+              {/* Visualization Area */}
+              <div className="py-16 px-8 relative min-h-[500px] flex items-center justify-center bg-gradient-to-b from-[#111] to-[#050505]">
+                {/* Plate shadow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-32 w-48 h-12 bg-black blur-xl opacity-60 rounded-full" />
 
-                  {/* Toppings */}
-                  {burger.toppings.includes('Fried Egg') && (
-                    <div className="w-full max-w-xs px-2">
-                      <div className="h-8 bg-gradient-to-b from-yellow-200 to-yellow-300 rounded-full border-2 border-yellow-400 shadow-sm"></div>
-                    </div>
-                  )}
-                  
-                  {burger.toppings.includes('Bacon') && (
-                    <div className="w-full max-w-xs px-6">
-                      <div className="h-5 bg-gradient-to-r from-red-500 via-pink-500 to-red-500 rounded-full shadow-sm"></div>
-                    </div>
-                  )}
-                  
-                  {burger.toppings.includes('Avocado') && (
-                    <div className="w-full max-w-xs px-4">
-                      <div className="h-6 bg-gradient-to-b from-green-300 to-green-400 rounded-full shadow-sm"></div>
-                    </div>
-                  )}
-                  
-                  {burger.toppings.includes('Tomato') && (
-                    <div className="w-full max-w-xs px-8">
-                      <div className="h-6 bg-gradient-to-b from-red-400 to-red-500 rounded-full shadow-sm"></div>
-                    </div>
-                  )}
-                  
-                  {burger.toppings.includes('Onion') && (
-                    <div className="w-full max-w-xs px-10">
-                      <div className="h-4 bg-gradient-to-b from-purple-100 to-purple-200 rounded-full border border-purple-300 shadow-sm"></div>
-                    </div>
-                  )}
-                  
-                  {burger.toppings.includes('Lettuce') && (
-                    <div className="w-full max-w-xs px-3">
-                      <div className="h-8 bg-gradient-to-b from-green-400 to-green-500 rounded-full shadow-sm"></div>
-                    </div>
-                  )}
-                  
-                  {burger.toppings.includes('Pickles') && (
-                    <div className="w-full max-w-xs px-12">
-                      <div className="h-4 bg-gradient-to-b from-green-500 to-green-600 rounded-full shadow-sm"></div>
-                    </div>
-                  )}
+                <div className="flex flex-col-reverse items-center transform scale-125 transition-all duration-300 hover:scale-130 cursor-grab active:cursor-grabbing">
+
+                  {/* Bottom Bun */}
+                  <IngredientLayer
+                    colorStart="#F59E0B" colorEnd="#D97706" height="h-10"
+                    className="rounded-b-[30px] !rounded-t-none w-44"
+                  />
+
+                  {/* Patty */}
+                  <IngredientLayer
+                    colorStart={
+                      burger.base.includes('Beef') ? '#78350F' :
+                        burger.base.includes('Chicken') ? '#EDA642' :
+                          burger.base.includes('Veggie') ? '#3F6212' : '#7C2D12'
+                    }
+                    colorEnd={
+                      burger.base.includes('Beef') ? '#451A03' :
+                        burger.base.includes('Chicken') ? '#D97706' :
+                          burger.base.includes('Veggie') ? '#14532D' : '#451A03'
+                    }
+                    height="h-12"
+                    className="w-[170px]"
+                  />
 
                   {/* Cheese */}
                   {burger.cheese !== 'No Cheese' && (
-                    <div className="w-full max-w-xs px-4">
-                      <div className="h-5 bg-gradient-to-b from-yellow-300 to-yellow-400 rounded-full shadow-md"></div>
-                    </div>
+                    <IngredientLayer colorStart="#FCD34D" colorEnd="#F59E0B" height="h-3" className="w-[180px] -mb-1 z-10" />
                   )}
-                  
-                  {/* Patty */}
-                  <div className="w-full max-w-xs">
-                    <div className={`h-16 rounded-full shadow-lg ${
-                      burger.base.includes('Beef') ? 'bg-gradient-to-b from-amber-800 to-amber-900' :
-                      burger.base.includes('Chicken') ? 'bg-gradient-to-b from-amber-600 to-amber-700' :
-                      burger.base.includes('Veggie') ? 'bg-gradient-to-b from-green-600 to-green-700' :
-                      'bg-gradient-to-b from-purple-600 to-purple-700'
-                    }`}></div>
-                  </div>
-                  
-                  {/* Bottom Bun */}
-                  <div className="w-full max-w-xs">
-                    <div className="h-12 bg-gradient-to-t from-amber-300 to-amber-400 rounded-b-full border-t-4 border-amber-500 shadow-md"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            {/* Ingredients Summary */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-gray-600" />
-                Selected Ingredients
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium text-sm border border-gray-200">
-                  {burger.base}
-                </span>
-                <span className="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium text-sm border border-gray-200">
-                  {burger.cheese}
-                </span>
-                <span className="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium text-sm border border-gray-200">
-                  {burger.size} Size
-                </span>
-                {burger.toppings.map((topping, idx) => (
-                  <span key={idx} className="px-4 py-2 bg-green-50 text-green-800 rounded-lg font-medium text-sm border border-green-200">
-                    {topping}
-                  </span>
-                ))}
-                {burger.sauces.map((sauce, idx) => (
-                  <span key={idx} className="px-4 py-2 bg-red-50 text-red-800 rounded-lg font-medium text-sm border border-red-200">
-                    {sauce}
-                  </span>
-                ))}
+                  {/* Toppings - Rendered dynamically */}
+                  <AnimatePresence>
+                    {burger.toppings.includes('Pickles') && (
+                      <IngredientLayer key="pickles" colorStart="#84CC16" colorEnd="#4D7C0F" height="h-2" className="w-[160px]" />
+                    )}
+
+                    {burger.toppings.includes('Lettuce') && (
+                      <IngredientLayer key="lettuce" colorStart="#86EFAC" colorEnd="#22C55E" height="h-6" className="w-[190px] skew-y-1" />
+                    )}
+
+                    {burger.toppings.includes('Onion') && (
+                      <IngredientLayer key="onion" colorStart="#E9D5FF" colorEnd="#C084FC" height="h-2" className="w-[150px]" />
+                    )}
+
+                    {burger.toppings.includes('Tomato') && (
+                      <IngredientLayer key="tomato" colorStart="#EF4444" colorEnd="#991B1B" height="h-4" className="w-[160px]" />
+                    )}
+
+                    {burger.toppings.includes('Avocado') && (
+                      <IngredientLayer key="avocado" colorStart="#86EFAC" colorEnd="#16A34A" height="h-5" className="w-[165px]" />
+                    )}
+
+                    {burger.toppings.includes('Bacon') && (
+                      <IngredientLayer key="bacon" colorStart="#EF4444" colorEnd="#7F1D1D" height="h-3" className="w-[170px] skew-x-6" />
+                    )}
+
+                    {burger.toppings.includes('Fried Egg') && (
+                      <div className="relative w-[160px] h-4 mx-auto my-1">
+                        <div className="absolute inset-0 bg-white rounded-full" />
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-yellow-400 rounded-full shadow-inner" />
+                      </div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Sauces */}
+                  {burger.sauces.length > 0 && (
+                    <IngredientLayer colorStart="#FECACA" colorEnd="#EF4444" height="h-2" className="w-[165px]" />
+                  )}
+
+                  {/* Top Bun */}
+                  <IngredientLayer
+                    colorStart="#FBBF24" colorEnd="#D97706" height="h-14"
+                    className="rounded-t-[50px] !rounded-b-none w-44 shadow-xl z-20"
+                    style={{ background: 'radial-gradient(circle at 30% 30%, #FDE68A 0%, #F59E0B 100%)' }}
+                  />
+
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right: Customization Panel */}
-          <div className="space-y-6">
-            {/* Base Selection */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+          {/* Right: Customization Controls */}
+          <div className="lg:col-span-7 space-y-6">
+
+            {/* Step 1: Base */}
+            <div className="bg-white/5 rounded-2xl border border-white/10 p-6 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Choose Base</h3>
-                <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Step 1</span>
+                <h3 className="text-lg font-bold text-white">Choose Your Base</h3>
+                <span className="text-[10px] font-bold text-black bg-white px-2 py-0.5 rounded">STEP 1</span>
               </div>
-              <div className="space-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {ingredients.bases.map((base) => (
                   <button
                     key={base.name}
-                    onClick={() => setBurger({...burger, base: base.name})}
-                    className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
-                      burger.base === base.name
-                        ? 'border-gray-900 bg-gray-50 shadow-md'
-                        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                    }`}
+                    onClick={() => setBurger({ ...burger, base: base.name })}
+                    className={`p-4 rounded-xl border transition-all text-left flex items-center justify-between group ${burger.base === base.name
+                        ? 'bg-gradient-to-r from-red-600/20 to-orange-600/20 border-red-500/50'
+                        : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10'
+                      }`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-900">{base.name}</span>
-                      <div className="flex items-center gap-2">
-                        {base.price > 0 && (
-                          <span className="text-sm font-semibold text-gray-600">+${base.price.toFixed(2)}</span>
-                        )}
-                        {burger.base === base.name && (
-                          <div className="w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center">
-                            <Check className="w-3 h-3 text-white" />
-                          </div>
-                        )}
+                    <div>
+                      <div className={`font-bold transition-colors ${burger.base === base.name ? 'text-red-400' : 'text-gray-300'}`}>
+                        {base.name}
                       </div>
+                      {base.price > 0 && <div className="text-xs text-gray-500 mt-1">+${base.price.toFixed(2)}</div>}
                     </div>
+                    {burger.base === base.name && <Check className="w-5 h-5 text-red-500" />}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Size Selection */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+            {/* Step 2: Size */}
+            <div className="bg-white/5 rounded-2xl border border-white/10 p-6 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Choose Size</h3>
-                <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Step 2</span>
+                <h3 className="text-lg font-bold text-white">Select Size</h3>
+                <span className="text-[10px] font-bold text-black bg-white px-2 py-0.5 rounded">STEP 2</span>
               </div>
               <div className="grid grid-cols-3 gap-3">
                 {ingredients.sizes.map((size) => (
                   <button
                     key={size.name}
-                    onClick={() => setBurger({...burger, size: size.name})}
-                    className={`p-4 rounded-xl border-2 flex flex-col items-center gap-2 transition-all ${
-                      burger.size === size.name
-                        ? 'border-gray-900 bg-gray-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
+                    onClick={() => setBurger({ ...burger, size: size.name })}
+                    className={`p-4 rounded-xl border flex flex-col items-center justify-center gap-2 transition-all ${burger.size === size.name
+                        ? 'bg-white/10 border-white text-white'
+                        : 'bg-white/5 border-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
+                      }`}
                   >
-                    <span className="font-semibold text-gray-900">{size.name}</span>
-                    <span className="text-xs text-gray-500">{size.description}</span>
-                    {size.price > 0 && (
-                      <span className="text-xs font-semibold text-gray-600">+${size.price.toFixed(2)}</span>
-                    )}
+                    <span className="font-bold">{size.name}</span>
+                    <span className="text-xs opacity-60">{size.description}</span>
+                    {size.price > 0 && <span className="text-xs font-bold text-red-400">+${size.price.toFixed(2)}</span>}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Cheese Selection */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+            {/* Step 3: Cheese */}
+            <div className="bg-white/5 rounded-2xl border border-white/10 p-6 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Choose Cheese</h3>
-                <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Step 3</span>
+                <h3 className="text-lg font-bold text-white">Cheese Selection</h3>
+                <span className="text-[10px] font-bold text-black bg-white px-2 py-0.5 rounded">STEP 3</span>
               </div>
-              <div className="space-y-2">
+              <div className="flex flex-wrap gap-2">
                 {ingredients.cheeses.map((cheese) => (
                   <button
                     key={cheese.name}
-                    onClick={() => setBurger({...burger, cheese: cheese.name})}
-                    className={`w-full p-3 rounded-lg border-2 text-left transition-all ${
-                      burger.cheese === cheese.name
-                        ? 'border-gray-900 bg-gray-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
+                    onClick={() => setBurger({ ...burger, cheese: cheese.name })}
+                    className={`px-4 py-2 rounded-lg border transition-all text-sm font-bold ${burger.cheese === cheese.name
+                        ? 'bg-yellow-500/20 border-yellow-500/50 text-yellow-400'
+                        : 'bg-white/5 border-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
+                      }`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-900 text-sm">{cheese.name}</span>
-                      <div className="flex items-center gap-2">
-                        {cheese.price > 0 && (
-                          <span className="text-xs font-semibold text-gray-600">+${cheese.price.toFixed(2)}</span>
-                        )}
-                        {burger.cheese === cheese.name && (
-                          <div className="w-4 h-4 bg-gray-900 rounded-full flex items-center justify-center">
-                            <Check className="w-2.5 h-2.5 text-white" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                    {cheese.name} {cheese.price > 0 && `(+$${cheese.price.toFixed(2)})`}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Toppings Selection */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+            {/* Step 4: Toppings */}
+            <div className="bg-white/5 rounded-2xl border border-white/10 p-6 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Add Toppings</h3>
-                <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Step 4</span>
+                <h3 className="text-lg font-bold text-white">Fresh Toppings</h3>
+                <span className="text-[10px] font-bold text-black bg-white px-2 py-0.5 rounded">STEP 4</span>
               </div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {ingredients.toppings.map((topping) => (
                   <button
                     key={topping.name}
                     onClick={() => toggleTopping(topping.name)}
-                    className={`p-3 rounded-lg border-2 text-left transition-all relative ${
-                      burger.toppings.includes(topping.name)
-                        ? 'border-green-600 bg-green-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
+                    className={`p-3 rounded-lg border transition-all text-left relative overflow-hidden ${burger.toppings.includes(topping.name)
+                        ? 'bg-green-500/20 border-green-500/40'
+                        : 'bg-white/5 border-white/5 hover:bg-white/10'
+                      }`}
                   >
-                    {burger.toppings.includes(topping.name) && (
-                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-600 rounded-full flex items-center justify-center shadow-md">
-                        <Check className="w-3 h-3 text-white" />
-                      </div>
-                    )}
-                    <div className="text-sm font-medium text-gray-900 mb-1">{topping.name}</div>
-                    {topping.price > 0 && (
-                      <div className="text-xs font-semibold text-gray-600">+${topping.price.toFixed(2)}</div>
-                    )}
+                    <div className="flex justify-between items-center relative z-10">
+                      <span className={`text-sm font-bold ${burger.toppings.includes(topping.name) ? 'text-green-400' : 'text-gray-400'}`}>
+                        {topping.name}
+                      </span>
+                      {burger.toppings.includes(topping.name) && <Check className="w-4 h-4 text-green-400" />}
+                    </div>
+                    {topping.price > 0 && <div className="text-xs text-gray-500 mt-1 relative z-10">+${topping.price.toFixed(2)}</div>}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Sauces Selection */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+            {/* Step 5: Sauces */}
+            <div className="bg-white/5 rounded-2xl border border-white/10 p-6 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Add Sauces</h3>
-                <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Step 5</span>
+                <h3 className="text-lg font-bold text-white">Sauces</h3>
+                <span className="text-[10px] font-bold text-black bg-white px-2 py-0.5 rounded">STEP 5</span>
               </div>
-              <div className="space-y-2">
+              <div className="flex flex-wrap gap-2">
                 {ingredients.sauces.map((sauce) => (
                   <button
                     key={sauce.name}
                     onClick={() => toggleSauce(sauce.name)}
-                    className={`w-full p-3 rounded-lg border-2 text-left transition-all relative ${
-                      burger.sauces.includes(sauce.name)
-                        ? 'border-red-600 bg-red-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
+                    className={`px-4 py-2 rounded-lg border transition-all text-sm font-bold flex items-center gap-2 ${burger.sauces.includes(sauce.name)
+                        ? 'bg-red-500/20 border-red-500/40 text-red-400'
+                        : 'bg-white/5 border-white/5 text-gray-400 hover:bg-white/10'
+                      }`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-900 text-sm">{sauce.name}</span>
-                      <div className="flex items-center gap-2">
-                        {sauce.price > 0 && (
-                          <span className="text-xs font-semibold text-gray-600">+${sauce.price.toFixed(2)}</span>
-                        )}
-                        {burger.sauces.includes(sauce.name) && (
-                          <div className="w-4 h-4 bg-red-600 rounded-full flex items-center justify-center">
-                            <Check className="w-2.5 h-2.5 text-white" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                    {sauce.name}
+                    {burger.sauces.includes(sauce.name) && <Check className="w-3 h-3" />}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="sticky bottom-6 space-y-3">
+            {/* Actions */}
+            <div className="flex gap-4 pt-4 sticky bottom-6 z-30">
               <button
                 onClick={resetBurger}
-                className="w-full bg-white border-2 border-gray-300 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-50 hover:border-gray-400 transition-all flex items-center justify-center gap-2"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-gray-400 font-bold hover:bg-white/10 hover:text-white transition-colors"
+                title="Reset Builder"
               >
-                <RotateCcw className="w-4 h-4" />
-                Reset to Default
+                <RotateCcw className="w-6 h-6" />
               </button>
-              
+
               <button
                 onClick={addToCart}
-                className={`w-full py-4 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2 ${
-                  addedToCart
-                    ? 'bg-green-600 text-white'
-                    : 'bg-gray-900 text-white hover:bg-gray-800 shadow-lg hover:shadow-xl'
-                }`}
+                className={`flex-1 py-4 rounded-xl font-black text-lg shadow-xl transition-all flex items-center justify-center gap-2 ${addedToCart
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gradient-to-r from-red-600 to-orange-600 text-white hover:scale-[1.02]'
+                  }`}
               >
                 {addedToCart ? (
                   <>
-                    <Check className="w-5 h-5" />
-                    Added to Cart!
+                    <Check className="w-6 h-6" />
+                    ADDED TO CART
                   </>
                 ) : (
                   <>
-                    <ShoppingCart className="w-5 h-5" />
-                    Add to Cart - ${calculatePrice()}
+                    <ShoppingCart className="w-6 h-6" />
+                    ADD TO CART - ${calculatePrice()}
                   </>
                 )}
               </button>
             </div>
+
           </div>
         </div>
       </div>
