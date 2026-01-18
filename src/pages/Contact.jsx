@@ -232,7 +232,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-xl text-white focus:outline-none focus:border-red-500/50 focus:bg-black/60 transition-all"
-                      placeholder="John Doe"
+                      placeholder="Your Name"
                     />
                   </div>
                   <div className="space-y-2">
